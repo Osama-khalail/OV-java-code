@@ -21,7 +21,17 @@ package OVChipkaart;
     
     public ArrayList<OVChipkaart> getOVChipkaarten() {
         return ovChipkaarten;
-    }	
+    }
+
+	public OVChipkaart getOVKaartMetKaartNummer(int kaartNummer) {
+		for (OVChipkaart ovKaart : ovChipkaarten) {
+			if (ovKaart.getKaartnummer() == kaartNummer) {
+				return ovKaart;
+			}
+		}
+		return null;
+	}
+
 	 public int getId() {
 	        return id;
 	    }

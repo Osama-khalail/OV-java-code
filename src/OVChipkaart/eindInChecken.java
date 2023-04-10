@@ -33,23 +33,26 @@ public class eindInChecken {
 
         // Zoek de reiziger op basis van naam en kaartnummer
         Reiziger gevondenReiziger = null;
+
+
         for (Reiziger r : reizigers) {
             if (r.getNaam().equals(naam)) {
-                OVChipkaart ovChipkaart = r.getOVChipkaarten().get(kaartnummer);
-                if (ovChipkaart != null) {
-                    gevondenReiziger = r;
-                    break;
+                for (OVChipkaart ovkaart : r.getOVChipkaarten()) {
+                    if (ovkaart.getKaartnummer() == kaartnummer) {
+                        gevondenReiziger = r;
+                        break;
+                    }
                 }
             }
-        
         }
+
         if (gevondenReiziger == null) {
             System.out.println("Onbekende reiziger of kaartnummer.");
             return;
         }
 
         // Controleer of de reiziger voldoende saldo heeft om in te checken
-        OVChipkaart ovChipkaart = gevondenReiziger.getOVChipkaarten().get(kaartnummer);
+        OVChipkaart ovChipkaart = gevondenReiziger.getOVKaartMetKaartNummer(kaartnummer);
         if (ovChipkaart.getSaldo() < OVChipkaart.INCHECK_TARIEF) {
             System.out.println("Onvoldoende saldo om in te checken.");
             return;
