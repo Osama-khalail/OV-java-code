@@ -23,9 +23,6 @@ public class InCheckUitCheck {
     
     public void check() {
         // Voer de incheck- of uitcheck-actie uit
-        if (type == InCheckUitCheckType.IN) {
-            System.out.println("U bent ingecheckt bij station " + station);
-            ovChipkaart.setSaldo(ovChipkaart.getSaldo() - OVChipkaart.INCHECK_TARIEF);
-        } 
+
     }
 }

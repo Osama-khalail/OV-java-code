@@ -9,6 +9,7 @@ import java.util.List;
 public class eindInChecken {
 
     public static void main(String[] args) {
+        OVSysteem ovSysteem = new OVSysteem();
         Scanner scanner = new Scanner(System.in);
         List<Reiziger> reizigers = new ArrayList<>(); // declareer en initialiseer de lijst van reizigers
         Reiziger reiziger = new Reiziger(11228833, "Erik", "Straatweg 1", "mijnwachtwoord");
@@ -51,15 +52,13 @@ public class eindInChecken {
             return;
         }
 
-        // Controleer of de reiziger voldoende saldo heeft om in te checken
-        OVChipkaart ovChipkaart = gevondenReiziger.getOVKaartMetKaartNummer(kaartnummer);
-        if (ovChipkaart.getSaldo() < OVChipkaart.INCHECK_TARIEF) {
-            System.out.println("Onvoldoende saldo om in te checken.");
-            return;
-        }
+        // Inchecken
+        ovSysteem.inchecken(reiziger, kaartnummer, station);
 
-        // Voer het inchecken uit
-        InCheckUitCheck inCheck = new InCheckUitCheck(gevondenReiziger, ovChipkaart, station, InCheckUitCheck.InCheckUitCheckType.IN);
-        inCheck.check();
+        // Uitchecken
+        System.out.print("Voer ur uitcheck station in: ");
+        String uitcheckStation = scanner.nextLine();
+        ovSysteem.uitchecken(reiziger, kaartnummer, uitcheckStation);
+
     }
 }
